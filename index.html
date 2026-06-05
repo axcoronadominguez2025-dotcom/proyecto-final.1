@@ -1,52 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practica_3_4</title>
+    <title>Sitio Responsivo</title>
     <link rel="stylesheet" href="stylos.css">
 </head>
 <body>
-    <div id="juego">
-
-<div id="puntaje">
-
-Puntos: 0
-
-</div>
-
-<div id="jugador">
-
-⛄​​
-
-</div>
-
-<div id="tuboSuperior1"
-class="tubo">
-
-</div>
-
-<div id="tuboInferior1"
-class="tubo">
-
-</div>
-
-<div id="tuboSuperior2"
-class="tubo">
-
-</div>
-
-<div id="tuboInferior2"
-class="tubo">
-
-</div>
-
-</div>
-
-<script src="scripts.js">
-
-</script>
-
+    <header>
+        <h1>Mi sitio web</h1>
+    </header>
     
+    <nav class="menu">
+        <div>Inicio</div>
+        <div>Servicios</div>
+        <div>Productos</div>
+        <div>Contacto</div>
+    </nav>
+    
+    <main class="contenedor">
+        <section class="contenido">
+            <h2>Contenido principal</h2>
+            <p>Este es un ejemplo de diseño responsivo.</p>
+            
+            <div class="tarjetas">
+                <div class="card">
+                    Tarjeta 1 <br>
+                    <button onclick="pruebaboton1()">oprime el boton</button>
+                </div>
+                <div class="card">
+                    Tarjeta 2 <br>
+                    <button onclick="pruebaboton2()">oprime el boton</button>
+                </div>
+                <div class="card">
+                    Tarjeta 3 <br>
+                    <button onclick="pruebaboton3()">oprime el boton</button>
+                </div>
+            </div>
+        </section>
+        
+        <aside class="sidebar">
+            <h3>Barra lateral</h3>
+            <p>Información adicional</p>
+        </aside>
+    </main>
+    
+    <footer>
+        <p>© 2026 - Sitio responsivo</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
