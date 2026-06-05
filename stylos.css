@@ -1,110 +1,166 @@
+*{
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+margin:0;
+padding:0;
+
+box-sizing:border-box;
+
 }
 
+body{
 
-body {
-    font-family: Arial, sans-serif;
+overflow:hidden;
+
+background:rgb(0, 187, 255);
+
+font-family:Arial;
+
 }
 
+#juego{
 
-header {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
+width:100vw;
+
+height:100vh;
+
+position:relative;
+
+overflow:hidden;
+
 }
 
+/* jugador */
 
-.menu {
-    display: flex;
-    justify-content: space-around;
-    background: #555;
+#jugador{
+
+position:absolute;
+
+left:120px;
+
+top:200px;
+
+font-size:40px;
+
+width:60px;
+
+height:60px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:10;
+
 }
 
-.menu div {
-    padding: 15px;
-    color: white;
+/* tubos */
+
+.tubo{
+
+position:absolute;
+
+width:80px;
+
+background:rgb(142, 253, 185);
+
+right:-100px;
+
 }
 
+/* superior */
 
-.contenedor {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 20px;
-    padding: 20px;
+#tuboSuperior1{
+
+height:200px;
+
+top:0;
+
 }
 
+#tuboSuperior2{
 
-.contenido {
-    background: #f4f4f4;
-    padding: 20px;
+height:300px;
+
+top:0;
+
 }
 
+/* inferior */
 
-.sidebar {
-    background: #ddd;
-    padding: 20px;
+#tuboInferior1{
+
+height:250px;
+
+bottom:0;
+
 }
 
+#tuboInferior2{
 
-.tarjetas {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+height:350px;
+
+bottom:0;
+
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    flex: 1;
-    text-align: center;
+/* puntaje */
+
+#puntaje{
+
+position:absolute;
+
+top:20px;
+
+left:20px;
+
+background:white;
+
+padding:10px;
+
+border-radius:10px;
+
+font-weight:bold;
+
+z-index:20;
+
 }
 
-
-.card button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 3px;
-}
-
-.card button:hover {
-    background-color: #555;
-}
-
-
-footer {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
-
-
-@media (max-width: 768px) {
-    
-    .menu {
-        flex-direction: column;
-        align-items: center;
-    }
+@media screen and (max-width: 768px) {
    
-    .contenedor {
-        grid-template-columns: 1fr;
-    }
+body{
+
+overflow:hidden;
+
+background:rgb(46, 164, 207);
+
+font-family:Arial;
+
+}
+
+#jugador{
+
+position:absolute;
+
+left:120px;
+
+top:200px;
+
+font-size:55px;
+
+width:60px;
+
+height:60px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:10;
+
+}
     
-    .tarjetas {
-        flex-direction: column;
-    }
-    
-    header h1 {
-        font-size: 20px;
-    }
 }
