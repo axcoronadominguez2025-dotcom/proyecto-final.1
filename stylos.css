@@ -1,166 +1,432 @@
-*{
+* ===========================
+   REFERENCIAS DEL DOM
+=========================== */
 
-margin:0;
-padding:0;
+const jugador =
+document.getElementById(
+"jugador"
+);
 
-box-sizing:border-box;
+const tuboSup1 =
+document.getElementById(
+"tuboSuperior1"
+);
 
-}
+const tuboInf1 =
+document.getElementById(
+"tuboInferior1"
+);
 
-body{
+const tuboSup2 =
+document.getElementById(
+"tuboSuperior2"
+);
 
-overflow:hidden;
+const tuboInf2 =
+document.getElementById(
+"tuboInferior2"
+);
 
-background:rgb(0, 187, 255);
+const puntajeTexto =
+document.getElementById(
+"puntaje"
+);
 
-font-family:Arial;
+/* ======================    =====
+   VARIABLES DEL JUEGO
+=========================== */
 
-}
+let y = 200;
 
-#juego{
+let gravedad = 3;
 
-width:100vw;
+let salto = 45;
 
-height:100vh;
+let puntos = 0;
 
-position:relative;
+let juegoActivo = true;
 
-overflow:hidden;
+/* dificultad */
 
-}
+let hueco = 150;
 
-/* jugador */
+/* alturas permitidas */
 
-#jugador{
+let alturaMinima = 80;
 
-position:absolute;
+let alturaMaxima = 220;
 
-left:120px;
+/* separación entre obstáculos */
 
-top:200px;
+let separacion = 500;
 
-font-size:40px;
+/* posiciones iniciales */
 
-width:60px;
+let tuboX1 =
+window.innerWidth;
 
-height:60px;
+let tuboX2 =
+window.innerWidth +
+separacion;
 
-display:flex;
+/* ===========================
+   GENERADOR DE TUBOS
+=========================== */
 
-justify-content:center;
+function generarTubo(
+tuboSuperior,
+tuboInferior
+){
 
-align-items:center;
+let alturaSuperior =
 
-z-index:10;
+Math.floor(
 
-}
+Math.random() *
 
-/* tubos */
+(
+alturaMaxima -
+alturaMinima
+)
 
-.tubo{
+)
 
-position:absolute;
++
 
-width:80px;
+alturaMinima;
 
-background:rgb(142, 253, 185);
+let alturaInferior =
 
-right:-100px;
+window.innerHeight
 
-}
+-
 
-/* superior */
+alturaSuperior
 
-#tuboSuperior1{
+-
 
-height:200px;
+hueco;
 
-top:0;
+/* evitar valores negativos */
 
-}
+if(
+alturaInferior < 50
+){
 
-#tuboSuperior2{
-
-height:300px;
-
-top:0;
-
-}
-
-/* inferior */
-
-#tuboInferior1{
-
-height:250px;
-
-bottom:0;
-
-}
-
-#tuboInferior2{
-
-height:350px;
-
-bottom:0;
-
-}
-
-/* puntaje */
-
-#puntaje{
-
-position:absolute;
-
-top:20px;
-
-left:20px;
-
-background:white;
-
-padding:10px;
-
-border-radius:10px;
-
-font-weight:bold;
-
-z-index:20;
+alturaInferior = 50;
 
 }
 
-@media screen and (max-width: 768px) {
-   
-body{
+tuboSuperior.style.height =
 
-overflow:hidden;
+alturaSuperior + "px";
 
-background:rgb(46, 164, 207);
+tuboInferior.style.height =
 
-font-family:Arial;
+alturaInferior + "px";
 
 }
 
-#jugador{
+/* generar tubos iniciales */
 
-position:absolute;
+generarTubo(
+tuboSup1,
+tuboInf1
+);
 
-left:120px;
+generarTubo(
+tuboSup2,
+tuboInf2
+);
 
-top:200px;
+/* ===========================
+   SALTO
+=========================== */
 
-font-size:55px;
+function brincar(){
 
-width:60px;
+if(
+juegoActivo
+){
 
-height:60px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-z-index:10;
+y -= salto;
 
 }
-    
+
 }
+
+/* ===========================
+   TECLADO
+=========================== */
+
+document.addEventListener(
+
+"keydown",
+
+function(event){
+
+if(
+event.code ==
+"Space"
+){
+
+brincar();
+
+}
+
+}
+
+);
+
+/* ===========================
+   CLICK PARA MOVIL
+=========================== */
+
+document.addEventListener(
+
+"click",
+
+brincar
+
+);
+
+/* ===========================
+   BUCLE PRINCIPAL
+=========================== */
+
+function actualizar(){
+
+if(
+!juegoActivo
+){
+
+return;
+
+}
+
+/* gravedad */
+
+y += gravedad;
+
+jugador.style.top =
+y + "px";
+
+/* mover tubos */
+
+tuboX1 -= 5;
+
+tuboX2 -= 5;
+
+/* actualizar posición */
+
+tuboSup1.style.left =
+tuboX1 + "px";
+
+tuboInf1.style.left =
+tuboX1 + "px";
+
+tuboSup2.style.left =
+tuboX2 + "px";
+
+tuboInf2.style.left =
+tuboX2 + "px";
+
+/* =======================
+   REINICIO TUBO 1
+======================= */
+
+if(
+tuboX1 < -100
+){
+
+tuboX1 =
+
+tuboX2 +
+
+separacion;
+
+generarTubo(
+
+tuboSup1,
+
+tuboInf1
+
+);
+
+puntos++;
+
+puntajeTexto.innerHTML =
+
+"Puntos: " +
+
+puntos;
+
+}
+
+/* =======================
+   REINICIO TUBO 2
+======================= */
+
+if(
+tuboX2 < -100
+){
+
+tuboX2 =
+
+tuboX1 +
+
+separacion;
+
+generarTubo(
+
+tuboSup2,
+
+tuboInf2
+
+);
+
+puntos++;
+
+puntajeTexto.innerHTML =
+
+"Puntos: " +
+
+puntos;
+
+}
+
+/* =======================
+   COLISIÓN SUELO
+======================= */
+
+if(
+y >
+window.innerHeight - 60
+){
+
+finJuego();
+
+}
+
+/* =======================
+   COLISIÓN TECHO
+======================= */
+
+if(
+y < 0
+){
+
+finJuego();
+
+}
+
+/* =======================
+   COLISIÓN TUBOS
+======================= */
+
+let jugadorRect =
+
+jugador.getBoundingClientRect();
+
+if(
+
+intersecta(
+
+jugadorRect,
+
+tuboSup1.getBoundingClientRect()
+
+)
+
+||
+
+intersecta(
+
+jugadorRect,
+
+tuboInf1.getBoundingClientRect()
+
+)
+
+||
+
+intersecta(
+
+jugadorRect,
+
+tuboSup2.getBoundingClientRect()
+
+)
+
+||
+
+intersecta(
+
+jugadorRect,
+
+tuboInf2.getBoundingClientRect()
+
+)
+
+){
+
+finJuego();
+
+}
+
+}
+
+/* ===========================
+   DETECCIÓN DE COLISIÓN
+=========================== */
+
+function intersecta(
+a,
+b
+){
+
+return !(
+
+a.right < b.left ||
+
+a.left > b.right ||
+
+a.bottom < b.top ||
+
+a.top > b.bottom
+
+);
+
+}
+
+/* ===========================
+   FIN DEL JUEGO
+=========================== */
+
+function finJuego(){
+
+juegoActivo = false;
+
+alert(
+
+"Juego terminado\nPuntos: "
+
++
+
+puntos
+
+);
+
+location.reload();
+
+}
+
+/* ===========================
+   VELOCIDAD DEL JUEGO
+=========================== */
+
+setInterval(
+
+actualizar,
+
+25
